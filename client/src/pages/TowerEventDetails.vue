@@ -33,7 +33,7 @@ onMounted(()=> {
 <template>
 
 
-<div class="container">
+<div v-if="event" class="container">
   <h1 class="text-center"> {{ event.name }} {{ event.type }}</h1>
   <section class="row">
     <div class="col-6 d-flex justify-content-center">
