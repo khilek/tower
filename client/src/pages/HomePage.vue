@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { towerEventsService } from "../services/TowerEventsService.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
@@ -7,6 +7,35 @@ import { AppState } from "../AppState.js";
 
 
 const events = computed(()=> AppState.events)
+
+
+const filterBy = ref('all')
+
+const eventType = computed(()=> {
+  if(filterBy.value == 'all') return AppState.events
+  return AppState.events.filter(event => event.type == filterBy.value)
+})
+
+
+const filters = [
+{
+  name: 'all'
+},
+{
+  name: 'concert'
+},
+{
+  name: 'convention'
+},
+{
+  name: 'sports'
+},
+{
+  name: 'digital'
+}
+
+]
+
 
 async function getEvents(){
 try {
@@ -35,13 +64,23 @@ onMounted(() => {
       </button>
     </div>
   </section>
+
+  <section class="row" >
+  <div class="col text-center" v-for="filterObj in filters" :key="filterObj.name">
+    <div @click="filterBy = filterObj.name" role="button" class="selectable">
+{{ filterObj.name }}
+    </div>
+    
+  </div>
+</section>
   
-  
+ 
+
   <div class="container">
   <section class="row">
-      <div class="col-4" v-for="e in events" :key="e.id">
+      <div class="col-4 text-center" v-for="e in eventType" :key="e.id">
         <EventCard :event="e"/>
-    </div>
+      </div>
   </section>
 
 
