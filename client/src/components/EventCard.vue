@@ -19,7 +19,7 @@ defineProps({event: {type: TowerEvent, required: true}})
           <h5 class="card-title">
             {{ event.name }} {{ event.location }}
           </h5>
-          <p class="card-text">{{ event.description }}</p>
+          <!-- <p class="card-text">{{ event.description }}</p> -->
           <p class="card-text"><small>When: {{ event.startDate.toLocaleString() }} </small></p>
           <p>Event Capacity: {{ event.capacity }}</p>
           
