@@ -31,6 +31,13 @@ class TowerEventsService {
     AppState.events.push(newEvent)
   }
 
+  async closeEvent(eventId) {
+    const response = await api.delete(`api/events/${eventId}`)
+    logger.log('Closing Event', response.data)
+
+  }
+
+
 }
 
 export const towerEventsService = new TowerEventsService()
