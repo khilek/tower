@@ -12,6 +12,8 @@ export class TowerEvent {
     this.startDate = new Date(data.startDate)
     this.isCanceled = data.isCanceled
     this.creatorId = data.creatorId
+
+    this.ticketCount = data.ticketCount
   }
 
 }
