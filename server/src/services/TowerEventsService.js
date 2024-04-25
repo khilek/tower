@@ -7,18 +7,18 @@ import { Forbidden } from "../utils/Errors.js"
 class TowerEventsService {
 
   async getEvents() {
-    const events = await dbContext.Events.find()
+    const events = await dbContext.Events.find().populate('ticketCount')
     return events
   }
 
   async createEvents(eventData) {
     const events = await dbContext.Events.create(eventData)
-    await events.populate('creator')
+    await events.populate('creator ticketCount')
     return events
   }
 
   async getEventById(eventId) {
-    const events = await dbContext.Events.findById(eventId)
+    const events = await (await dbContext.Events.findById(eventId)).populate('ticketCount')
     if (!events) throw new Error(`No Event with that ID: ${eventId}`)
     return events
   }
