@@ -11,8 +11,6 @@ import { ticketsService } from "../services/TicketsService.js";
 const route = useRoute()
 
 const event = computed(() => AppState.activeEvent)
-
-const tickets = computed(() => AppState.activeTickets)
 const ticketHolders = computed(() => AppState.activeTicketHolders)
 const youAreATicketHolder = computed(() => ticketHolders.value.find(ticket => ticket.accountId == AppState.account?.id))
 

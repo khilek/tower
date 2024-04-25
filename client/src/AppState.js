@@ -23,7 +23,10 @@ export const AppState = reactive({
   activeTickets: [],
 
   /**@type {Ticket[]} */
-  activeTicketHolders: []
+  activeTicketHolders: [],
+
+  /**@type {Ticket[]} */
+  accountTickets: []
 
 
 
