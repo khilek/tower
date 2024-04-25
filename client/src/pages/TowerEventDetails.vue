@@ -72,7 +72,8 @@ onMounted(() => {
     <h1 class="text-center"> {{ event.name }} </h1>
     <p class="fw-medium fs-3 text-center">{{ event.type }}</p>
     <div class="col text-end p-3">
-      <button @click="closeEvent()" class="btn btn-outline-danger">Cancel Event</button>
+      <button @click="closeEvent()" class="btn btn-outline-danger">Cancel
+        Event</button>
     </div>
     <section class="row">
       <div class="col-6 d-flex justify-content-center">

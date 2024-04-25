@@ -8,6 +8,7 @@ export class TicketsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTicket)
+      .delete('/:ticketId', this.ripTicket)
 
 
   }
@@ -23,11 +24,18 @@ export class TicketsController extends BaseController {
     } catch (error) {
       next(error)
     }
-
-
   }
 
+  async ripTicket(request, response, next) {
+    try {
+      const ticketId = request.params.ticketId
+      const user = request.userInfo
+      const message = await ticketsService.ripTicket(ticketId, user.id)
+      response.send(message)
+    } catch (error) {
 
+    }
+  }
 
 
 

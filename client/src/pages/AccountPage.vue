@@ -4,7 +4,8 @@ import { AppState } from '../AppState.js';
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { accountService } from "../services/AccountService.js";
-import EventCard from "../components/EventCard.vue";
+
+import { ticketsService } from "../services/TicketsService.js";
 
 const account = computed(() => AppState.account)
 const ticketHolders = computed(() => AppState.accountTickets)
@@ -17,11 +18,16 @@ async function getMyTickets() {
     Pop.toast("Couldn't get My Tickets", 'error')
     logger.error(error)
   }
-
-
 }
 
-
+async function ripTicket(ticketId) {
+  try {
+    await ticketsService.ripTicket(ticketId)
+  } catch (error) {
+    Pop.toast("Couldn't Rip Up Ticket", 'error')
+    logger.error(error)
+  }
+}
 
 onMounted(() => {
   getMyTickets()
@@ -43,16 +49,20 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- <RouterLink :to="{ name: 'TowerEvents', params: { eventId: event.id } }"> -->
     <section class="row gap-3 ">
       <div class="col-2 g-3 p-2 card d-flex justify-content-center" v-for="ticketHolder in ticketHolders"
         :key="ticketHolder.id">
         <img class="img-fluid" :src="ticketHolder.event.coverImg" alt="">
-        {{ ticketHolder.event.name }}
+        <RouterLink :to="{ name: 'TowerEvents', params: { eventId: ticketHolder.event.id } }">
+          {{ ticketHolder.event.name }}
+        </RouterLink>
         {{ ticketHolder.event.startDate.toLocaleString() }}
+        <div class="d-flex justify-content-end m-2 p-2 ">
+          <button @click="ripTicket(ticketHolder.id)" class="btn btn-outline-danger w-25 "><i
+              class="mdi mdi-delete-outline"></i></button>
+        </div>
       </div>
     </section>
-    <!-- </RouterLink> -->
   </div>
 </template>
 

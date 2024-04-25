@@ -14,7 +14,13 @@ class TicketsService {
 
   }
 
+  async ripTicket(ticketId) {
+    const response = await api.delete(`api/tickets/${ticketId}`)
+    logger.log("Ripping Up Ticket", response.data)
+    const ticketToRemove = AppState.accountTickets.findIndex(ticket => ticket.id == ticketId)
+    AppState.accountTickets.splice(ticketToRemove, 1)
 
+  }
 
 
 }
