@@ -55,29 +55,29 @@ onMounted(() => {
 
 <template>
 
-
-
-  <section class="row m-3 ">
-    <div class="col d-flex justify-content-center">
-      <button class="btn btn-outline-dark" title="Post an Event!" data-bs-toggle="modal"
-        data-bs-target="#eventFormModal">
-        <i class="mdi mdi-plus">Create an Event!</i>
-      </button>
-    </div>
-  </section>
-
-  <section class="row">
-    <div class="col text-center" v-for="filterObj in filters" :key="filterObj.name">
-      <div @click="filterBy = filterObj.name" role="button" class="selectable">
-        {{ filterObj.name }}
-      </div>
-
-    </div>
-  </section>
-
-
-
   <div class="container">
+
+
+    <section class="row m-3 ">
+      <div class="col d-flex justify-content-center">
+        <button class="btn btn-outline-dark" title="Post an Event!" data-bs-toggle="modal"
+          data-bs-target="#eventFormModal">
+          <i class="mdi mdi-plus">Create an Event!</i>
+        </button>
+      </div>
+    </section>
+
+    <section class="row">
+      <div class="col text-center" v-for="filterObj in filters" :key="filterObj.name">
+        <div @click="filterBy = filterObj.name" role="button" class="selectable">
+          {{ filterObj.name }}
+        </div>
+
+      </div>
+    </section>
+
+
+
     <section class="row">
       <div class="col-3 text-center" v-for="e in eventType" :key="e.id">
         <EventCard :event="e" />

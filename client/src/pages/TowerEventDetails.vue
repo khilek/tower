@@ -88,7 +88,8 @@ onMounted(() => {
         <p class="fs-4"> Event Capacity: {{ event.capacity }}</p>
         <div class="col col-md- text-center border border-danger bg-danger">
           Is this event canceled?
-          <p class="fs-3 fw-bold"> {{ event.isCanceled }}</p>
+          <p v-if="event.isCanceled === true" class="fs-3 fw-bold"> Canceled</p>
+          <p v-else class="fs-3 fw-bold"> No </p>
         </div>
       </div>
     </section>
@@ -100,9 +101,9 @@ onMounted(() => {
       <div class="col-6 col-md-6 text-center mt-3 fw-bold fs-2">
         Attending Users {{ event.ticketCount }}
       </div>
-      <div v-if="event.ticketCount == event.capacity" class="col-3 text-center mt-3 fw-bold fs-2"> Sold out!
+      <div v-if="event.ticketCount === event.capacity" class="col-3 text-center mt-3 fw-bold fs-2"> Sold out!
       </div>
-      <div class="col-3 col-md-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
+      <div v-if="youAreATicketHolder" class="col-3 col-md-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
       </div>
     </section>
 
@@ -119,10 +120,9 @@ onMounted(() => {
       </div>
       <div class="col-6 col-md-6 card text-center p-3 fs-4">
         <span> Interested in attending? </span>
-        <button v-if="youAreATicketHolder" :disabled="event.capacity == event.ticketCount" @click="attendEvent()"
-          class="btn btn-success mt-3 ">Get a
+        <button v-if="!youAreATicketHolder" @click="attendEvent()" class="btn btn-success mt-3 ">Get a
           Ticket!</button>
-        <button v-else @click="attendEvent()" class="btn btn-success mt-3 ">Get a Ticket!</button>
+        <button v-else disabled @click="attendEvent()" class="btn btn-success mt-3 ">Get a Ticket!</button>
       </div>
     </section>
   </div>
