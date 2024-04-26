@@ -9,6 +9,7 @@ export class TowerCommentsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createComment)
+      .delete('/:commentId', this.eraseComment)
   }
 
 
@@ -24,6 +25,15 @@ export class TowerCommentsController extends BaseController {
     }
   }
 
-
+  async eraseComment(request, response, next) {
+    try {
+      const commentId = request.params.commentId
+      // const userId = request.userInfo
+      const message = await towerCommentsService.eraseComment(commentId)
+      response.send(message)
+    } catch (error) {
+      next(error)
+    }
+  }
 
 }
