@@ -72,7 +72,8 @@ onMounted(() => {
     <h1 class="text-center"> {{ event.name }} </h1>
     <p class="fw-medium fs-3 text-center">{{ event.type }}</p>
     <div class="col text-end p-3">
-      <button @click="closeEvent()" class="btn btn-outline-danger">Cancel
+      <button v-if="AppState.account?.id === event.creatorId" @click="closeEvent()"
+        class="btn btn-outline-danger">Cancel
         Event</button>
     </div>
     <section class="row">
@@ -99,9 +100,9 @@ onMounted(() => {
       <div class="col-6 text-center mt-3 fw-bold fs-2">
         Attending Users {{ event.ticketCount }}
       </div>
-      <div v-if="event.ticketCount === event.capacity" class="col-3 text-center mt-3 fw-bold fs-2"> Sold out!
+      <div v-if="event.ticketCount == event.capacity" class="col-3 text-center mt-3 fw-bold fs-2"> Sold out!
       </div>
-      <div v-if="youAreATicketHolder" class="col-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
+      <div class="col-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
       </div>
     </section>
 
