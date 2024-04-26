@@ -77,16 +77,16 @@ onMounted(() => {
         Event</button>
     </div>
     <section class="row">
-      <div class="col-6 d-flex justify-content-center">
+      <div class="col-6 col-md-6 d-flex justify-content-center">
         <img class="img-fluid" :src="event.coverImg" alt="">
       </div>
-      <div class="col-6 text-center border border-primary">
+      <div class="col-6 col-md-6 text-center border border-primary">
         <h2>EVENT DETAILS:</h2>
         <p> {{ event.description }} </p>
         <span class="fs-2">Where: {{ event.location }}</span>
         <p class="fs-3"> When: {{ event.startDate.toLocaleString() }}</p>
         <p class="fs-4"> Event Capacity: {{ event.capacity }}</p>
-        <div class="col text-center border border-danger bg-danger">
+        <div class="col col-md- text-center border border-danger bg-danger">
           Is this event canceled?
           <p class="fs-3 fw-bold"> {{ event.isCanceled }}</p>
         </div>
@@ -97,12 +97,12 @@ onMounted(() => {
 
 
     <section class="row">
-      <div class="col-6 text-center mt-3 fw-bold fs-2">
+      <div class="col-6 col-md-6 text-center mt-3 fw-bold fs-2">
         Attending Users {{ event.ticketCount }}
       </div>
       <div v-if="event.ticketCount == event.capacity" class="col-3 text-center mt-3 fw-bold fs-2"> Sold out!
       </div>
-      <div class="col-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
+      <div class="col-3 col-md-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
       </div>
     </section>
 
@@ -111,7 +111,7 @@ onMounted(() => {
     </section>
 
     <section class="row mt-3  ">
-      <div class="col-6 d-flex justify-content-center">
+      <div class="col-6 col-md-6 d-flex justify-content-center">
         <div v-for="ticket in ticketHolders" :key="ticket.id">
           <img class="attendee-img img-fluid" :src="ticket.profile.picture" :title="ticket.profile.name" alt=""> {{
             ticket.profile.name }}
