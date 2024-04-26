@@ -137,7 +137,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .attendee-img {
-  width: 3%;
+  width: 20%;
   aspect-ratio: 1/1;
   object-fit: cover;
   object-position: center;
