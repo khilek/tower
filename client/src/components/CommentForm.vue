@@ -51,7 +51,7 @@ function resetForm() {
       </div>
       <div class="row">
         <div class="mb-2 col-6 text-end">
-          <button class="btn btn-success">Post Comment <i class="mdi mdi-plus-outline"></i></button>
+          <button class="btn btn-primary">Post Comment <i class="mdi mdi-plus-outline"></i></button>
         </div>
       </div>
     </form>

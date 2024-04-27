@@ -15,7 +15,14 @@ class TowerCommentsService {
   }
 
 
-
+  async eraseComment(commentId) {
+    const response = await api.delete(`api/comments/${commentId}`)
+    logger.log('Erasing Comment', response.data)
+    const comments = AppState.activeComments
+    const commentToDelete = comments.findIndex(comment => comment.id == commentId)
+    if (commentToDelete == -1) throw new Error("Couldn't find Comment")
+    comments.splice(commentToDelete, 1)
+  }
 
 
 
