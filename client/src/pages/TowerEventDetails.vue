@@ -139,10 +139,10 @@ onMounted(() => {
     </section>
   </div>
 
-  <CommentForm />
   <div class="container">
+    <CommentForm />
     <section class="row">
-      <div class="col-6 col-md-6 card d-flex justify-content-center">
+      <div class="col-6 col-md-6 card d-flex justify-content-center p-2">
         <div v-for="comment in comments" :key="comment.id">
           <CommentCard :comment="comment" />
         </div>

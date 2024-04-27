@@ -12,28 +12,16 @@ const comments = computed(() => AppState.activeComments)
 
 <template>
 
-  <!-- <div class="container">
-    <section class="row ">
-      <div class="col-6 card"> -->
+
   <img class="creator-img" :src="comment.creator.picture" alt="">
 
   {{ comment.body }}
-
-
-
-  <!-- </div>
-
-    </section>
-
-  </div> -->
-
-
 </template>
 
 
 <style lang="scss" scoped>
 .creator-img {
-  width: 20%;
+  width: 10%;
   aspect-ratio: 1/1;
   object-fit: cover;
   object-position: center;
