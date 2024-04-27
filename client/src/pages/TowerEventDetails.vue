@@ -140,7 +140,15 @@ onMounted(() => {
   </div>
 
   <CommentForm />
-  {{ AppState.activeComments }}
+  <div class="container">
+    <section class="row">
+      <div class="col-6 col-md-6 card d-flex justify-content-center">
+        <div v-for="comment in comments" :key="comment.id">
+          <CommentCard :comment="comment" />
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 
