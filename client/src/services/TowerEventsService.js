@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js"
 import { Ticket } from "../models/Ticket.js"
+import { TowerComment } from "../models/TowerComment.js"
 import { TowerEvent } from "../models/TowerEvent.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
@@ -42,6 +43,14 @@ class TowerEventsService {
     logger.log("Getting Ticket Holders", response.data)
     const tickets = response.data.map(ticketHolder => new Ticket(ticketHolder))
     AppState.activeTicketHolders = tickets
+  }
+
+  async getEventComments(eventId) {
+    const response = await api.get(`api/events/${eventId}/comments`)
+    logger.log("Getting Comments", response.data)
+    const comments = response.data.map(commentData => new TowerComment(commentData))
+    AppState.activeComments = comments
+
   }
 
 

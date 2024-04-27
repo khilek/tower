@@ -6,10 +6,12 @@ import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { computed, onMounted } from "vue";
 import { ticketsService } from "../services/TicketsService.js";
+import { towerCommentsService } from "../services/TowerCommentsService.js";
 
 
 const route = useRoute()
 
+const comments = computed(() => AppState.activeComments)
 const event = computed(() => AppState.activeEvent)
 const ticketHolders = computed(() => AppState.activeTicketHolders)
 const youAreATicketHolder = computed(() => ticketHolders.value.find(ticket => ticket.accountId == AppState.account?.id))
@@ -56,10 +58,20 @@ async function getTicketHolders() {
   }
 }
 
+async function getEventComments() {
+  try {
+    await towerEventsService.getEventComments(route.params.eventId)
+
+  } catch (error) {
+    Pop.toast("Couldn't Get Event Comments", 'error')
+    logger.error(error)
+  }
+}
 
 onMounted(() => {
   getEventById()
   getTicketHolders()
+  getEventComments()
 })
 
 </script>
@@ -101,7 +113,7 @@ onMounted(() => {
       <div class="col-6 col-md-6 text-center mt-3 fw-bold fs-2">
         Attending Users {{ event.ticketCount }}
       </div>
-      <div v-if="event.ticketCount === event.capacity" class="col-3 text-center mt-3 fw-bold fs-2"> Sold out!
+      <div v-if="event.ticketCount === event.capacity" class="col-3 col-md-3 text-center mt-3 fw-bold fs-2"> Sold out!
       </div>
       <div v-if="youAreATicketHolder" class="col-3 col-md-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
       </div>
@@ -127,11 +139,8 @@ onMounted(() => {
     </section>
   </div>
 
-  <!-- <div class="container"> -->
-
-  <!-- </div> -->
-
-
+  <CommentForm />
+  {{ AppState.activeComments }}
 </template>
 
 
