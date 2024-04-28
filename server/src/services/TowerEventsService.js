@@ -26,7 +26,7 @@ class TowerEventsService {
   async editEventsById(eventId, eventData) {
     const eventToUpdate = await this.getEventById(eventId)
 
-    if (!eventToUpdate.isCanceled) throw new Error(`Event is Canceled, cannot edit ${eventToUpdate.isCanceled} `)
+    if () throw new Error(`Event is Canceled, cannot edit ${eventToUpdate.isCanceled} `)
 
     eventToUpdate.name = eventData.name ?? eventToUpdate.name
     eventToUpdate.description = eventData.description ?? eventToUpdate.description
