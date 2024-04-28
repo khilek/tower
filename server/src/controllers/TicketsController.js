@@ -5,6 +5,7 @@ import { ticketsService } from "../services/TicketsService.js";
 export class TicketsController extends BaseController {
   constructor() {
     super('api/tickets')
+
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTicket)
@@ -33,7 +34,7 @@ export class TicketsController extends BaseController {
       const message = await ticketsService.ripTicket(ticketId, user.id)
       response.send(message)
     } catch (error) {
-
+      next(error)
     }
   }
 

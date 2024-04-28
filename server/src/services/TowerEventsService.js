@@ -18,15 +18,20 @@ class TowerEventsService {
   }
 
   async getEventById(eventId) {
-    const events = await (await dbContext.Events.findById(eventId)).populate('ticketCount')
+    const events = await dbContext.Events.findById(eventId).populate('ticketCount')
     if (!events) throw new Error(`No Event with that ID: ${eventId}`)
     return events
   }
 
-  async editEventsById(eventId, eventData) {
+  async editEventsById(eventId, eventData, userId) {
     const eventToUpdate = await this.getEventById(eventId)
 
-    if () throw new Error(`Event is Canceled, cannot edit ${eventToUpdate.isCanceled} `)
+    // if (eventToUpdate.isCanceled = !eventToUpdate.isCanceled) throw new Error(`Event is Canceled, cannot edit ${eventToUpdate.isCanceled} `)
+    if (!eventToUpdate) throw new Error(`Couldn't  ${eventId}`)
+
+    if (eventToUpdate.isCanceled) throw new Error(`Couldn't edit ${eventId}`)
+
+    if (eventToUpdate.creatorId != userId) throw new Error("You are not the creator of this event")
 
     eventToUpdate.name = eventData.name ?? eventToUpdate.name
     eventToUpdate.description = eventData.description ?? eventToUpdate.description
@@ -34,7 +39,6 @@ class TowerEventsService {
     eventToUpdate.location = eventData.location ?? eventToUpdate.location
     eventToUpdate.capacity = eventData.capacity ?? eventToUpdate.capacity
     eventToUpdate.startDate = eventData.startDate ?? eventToUpdate.startDate
-
 
 
     await eventToUpdate.save()
@@ -45,7 +49,7 @@ class TowerEventsService {
   async closeEvent(eventId, userId) {
     const eventToClose = await this.getEventById(eventId)
     if (eventToClose.creatorId != userId) throw new Forbidden('You cannot close what you did not create')
-    eventToClose.isCanceled = !eventToClose.isCanceled
+    eventToClose.isCanceled = true
     await eventToClose.save()
 
     return `${eventToClose.name} has been closed!`

@@ -17,7 +17,7 @@ class TowerCommentsService {
   async eraseComment(commentId, userId) {
     const commentToDelete = await dbContext.Comments.findById(commentId)
     if (!commentToDelete) throw new Error(`No Comment with id ${commentId}`)
-    // if (commentToDelete.creatorId != userId) throw new Forbidden("This action is forbidden")
+    if (userId != commentToDelete.creatorId) throw new Forbidden("This action is forbidden")
 
     await commentToDelete.deleteOne()
     return commentToDelete

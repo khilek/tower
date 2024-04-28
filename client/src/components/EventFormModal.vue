@@ -4,6 +4,13 @@ import { towerEventsService } from "../services/TowerEventsService.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { Modal } from "bootstrap";
+import { useRouter } from "vue-router";
+
+
+
+const router = useRouter()
+
+
 
 const eventData = ref({
   name: '',
@@ -15,12 +22,14 @@ const eventData = ref({
   type: ''
 })
 
-
+function resetForm() {
+  eventData.value = { name: '', description: '', coverImg: '', location: '', capacity: '', startDate: '', type: '' }
+}
 
 async function createEvents() {
   try {
-    await towerEventsService.createEvents(eventData.value)
-
+    const newEvent = await towerEventsService.createEvents(eventData.value)
+    resetForm()
 
     eventData.value = {
       name: '',
@@ -33,6 +42,10 @@ async function createEvents() {
     }
 
     Modal.getOrCreateInstance('#eventFormModal').hide()
+
+    Pop.toast("Event Created!", 'success')
+
+    router.push({ name: 'TowerEvents', params: { eventId: newEvent.id } })
 
   } catch (error) {
     Pop.toast("Couldn't Create Event", 'error')
@@ -61,8 +74,8 @@ async function createEvents() {
           <form @submit.prevent="createEvents()">
 
             <div class="form-floating mb-3">
-              <textarea v-model="eventData.name" class="form-control" placeholder="What's the name of your event?"
-                id="eventName" maxlength="500"></textarea>
+              <input type="text" v-model="eventData.name" class="form-control"
+                placeholder="What's the name of your event?" id="eventName" maxlength="500">
               <label for="eventName">Event Name</label>
             </div>
             <div class="form-floating mb-3">
@@ -71,18 +84,18 @@ async function createEvents() {
               <label for="eventDescription">Event Description</label>
             </div>
             <div class="form-floating mb-3">
-              <textarea v-model="eventData.capacity" class="form-control" placeholder="Maximum Attendance Capacity"
-                id="eventCapacity" maxlength="500"></textarea>
+              <input type="text" v-model="eventData.capacity" class="form-control"
+                placeholder="Maximum Attendance Capacity" id="eventCapacity" maxlength="500">
               <label for="eventCapacity">Event Capacity</label>
             </div>
             <div class="form-floating mb-3">
-              <textarea v-model="eventData.location" class="form-control" placeholder="Where is the event?"
-                id="eventLocation" maxlength="500"></textarea>
+              <input type="text" v-model="eventData.location" class="form-control" placeholder="Where is the event?"
+                id="eventLocation" maxlength="500">
               <label for="eventLocation">Event Location</label>
             </div>
             <div class="form-floating mb-3">
-              <textarea v-model="eventData.startDate" class="form-control" placeholder="When is the event?"
-                name="eventStartDate" id="eventStartDate" maxlength="500"></textarea>
+              <input type="text" v-model="eventData.startDate" class="form-control" placeholder="When is the event?"
+                name="eventStartDate" id="eventStartDate" maxlength="500">
               <label for="eventStartDate">Event Start Date</label>
             </div>
             <div class="mb-3 col-4">

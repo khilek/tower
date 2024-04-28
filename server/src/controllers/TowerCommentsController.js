@@ -28,8 +28,8 @@ export class TowerCommentsController extends BaseController {
   async eraseComment(request, response, next) {
     try {
       const commentId = request.params.commentId
-      // const userId = request.userInfo
-      const message = await towerCommentsService.eraseComment(commentId)
+      const userId = request.userInfo.id
+      const message = await towerCommentsService.eraseComment(commentId, userId)
       response.send(message)
     } catch (error) {
       next(error)
