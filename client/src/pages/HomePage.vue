@@ -59,7 +59,7 @@ onMounted(() => {
 
 
     <section class="row m-3 ">
-      <div class="col d-flex justify-content-center">
+      <div class="col-12 d-flex justify-content-center">
         <button class="btn btn-outline-dark" title="Post an Event!" data-bs-toggle="modal"
           data-bs-target="#eventFormModal">
           <i class="mdi mdi-plus">Create an Event!</i>
@@ -68,7 +68,7 @@ onMounted(() => {
     </section>
 
     <section class="row">
-      <div class="col text-center" v-for="filterObj in filters" :key="filterObj.name">
+      <div class="col  text-center" v-for="filterObj in filters" :key="filterObj.name">
         <div @click="filterBy = filterObj.name" role="button" class="selectable">
           {{ filterObj.name }}
         </div>
@@ -79,7 +79,7 @@ onMounted(() => {
 
 
     <section class="row">
-      <div class="col-3 text-center" v-for="e in eventType" :key="e.id">
+      <div class="col-6 col-md-4 col-lg-2 text-center" v-for="e in eventType" :key="e.id">
         <EventCard :event="e" />
       </div>
     </section>

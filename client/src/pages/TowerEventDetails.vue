@@ -83,14 +83,14 @@ onMounted(() => {
   <div v-if="event" class="container">
     <h1 class="text-center"> {{ event.name }} </h1>
     <p class="fw-medium fs-3 text-center">{{ event.type }}</p>
-    <div class="col text-end p-3">
+    <div class="col col-md- text-end p-3">
       <button v-if="AppState.account?.id === event.creatorId" @click="closeEvent()"
         class="btn btn-outline-danger">Cancel
         Event</button>
     </div>
     <section class="row">
       <div class="col-6 col-md-6 d-flex justify-content-center">
-        <img class="img-fluid" :src="event.coverImg" alt="">
+        <img class="event-img" :src="event.coverImg" alt="">
       </div>
       <div class="col-6 col-md-6 text-center border border-primary">
         <h2>EVENT DETAILS:</h2>
@@ -98,9 +98,9 @@ onMounted(() => {
         <span class="fs-2">Where: {{ event.location }}</span>
         <p class="fs-3"> When: {{ event.startDate.toLocaleString() }}</p>
         <p class="fs-4"> Event Capacity: {{ event.capacity }}</p>
-        <div class="col col-md- text-center border border-danger bg-danger">
+        <div class="col col-md- text-center  ">
           Is this event canceled?
-          <p v-if="event.isCanceled === true" class="fs-3 fw-bold"> Canceled</p>
+          <p v-if="event.isCanceled === true" class="fs-3 fw-bold text-danger"> Canceled</p>
           <p v-else class="fs-3 fw-bold"> No </p>
         </div>
       </div>
@@ -113,9 +113,12 @@ onMounted(() => {
       <div class="col-6 col-md-6 text-center mt-3 fw-bold fs-2">
         Attending Users {{ event.ticketCount }}
       </div>
-      <div v-if="event.ticketCount === event.capacity" class="col-3 col-md-3 text-center mt-3 fw-bold fs-2"> Sold out!
+      <div v-if="event.ticketCount === event.capacity"
+        class="col-3 col-md-3 text-center mt-3 fw-bold fs-2 text-warning">
+        Sold out!
       </div>
-      <div v-if="youAreATicketHolder" class="col-3 col-md-3 text-center mt-3 fw-bold fs-2"> You have a Ticket!
+      <div v-if="youAreATicketHolder" class="col-3 col-md-3 text-center mt-3 fw-bold fs-2 text-success"> You are
+        attending!
       </div>
     </section>
 
@@ -132,7 +135,8 @@ onMounted(() => {
       </div>
       <div class="col-6 col-md-6 card text-center p-3 fs-4">
         <span> Interested in attending? </span>
-        <button v-if="!youAreATicketHolder" @click="attendEvent()" class="btn btn-success mt-3 ">Get a
+        <button v-if="!youAreATicketHolder" :disabled="event.capacity === event.ticketCount" @click="attendEvent()"
+          class="btn btn-success mt-3 ">Get a
           Ticket!</button>
         <button v-else disabled @click="attendEvent()" class="btn btn-success mt-3 ">Get a Ticket!</button>
       </div>
@@ -141,7 +145,7 @@ onMounted(() => {
 
   <div class="container">
     <CommentForm />
-    <section class="row">
+    <section class="row ">
       <div class="col-6 col-md-6 card d-flex justify-content-center p-2">
         <div v-for="comment in comments" :key="comment.id">
           <CommentCard :comment="comment" />
@@ -159,5 +163,11 @@ onMounted(() => {
   object-fit: cover;
   object-position: center;
   border-radius: 20px;
+}
+
+.event-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 </style>

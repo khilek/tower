@@ -37,13 +37,14 @@ async function eraseComment(commentId) {
 
 <template>
 
-
-  <img class="creator-img" :src="comment.creator.picture" alt="">
-  <p>{{ comment.creator.name }}</p>
-  <p>{{ comment.body }}</p>
-  <div class="text-end">
-    <button v-if="comment.creatorId == AppState.account?.id" @click="eraseComment(comment.id)"
-      class="btn btn-outline-danger" title="Full Send!">Delete</button>
+  <div class="card p-3 mb-3">
+    <img class="creator-img" :src="comment.creator.picture" alt="">
+    <p>{{ comment.creator.name }}</p>
+    <p>{{ comment.body }}</p>
+    <div class="text-end">
+      <button v-if="comment.creatorId == AppState.account?.id" @click="eraseComment(comment.id)"
+        class="btn btn-outline-danger" title="Full Send!">Delete</button>
+    </div>
   </div>
 </template>
 
@@ -52,7 +53,7 @@ async function eraseComment(commentId) {
 .creator-img {
   width: 10%;
   aspect-ratio: 1/1;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 20px;
 }

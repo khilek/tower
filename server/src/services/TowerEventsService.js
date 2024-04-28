@@ -26,12 +26,16 @@ class TowerEventsService {
   async editEventsById(eventId, eventData) {
     const eventToUpdate = await this.getEventById(eventId)
 
+    if (!eventToUpdate.isCanceled) throw new Error(`Event is Canceled, cannot edit ${eventToUpdate.isCanceled} `)
+
     eventToUpdate.name = eventData.name ?? eventToUpdate.name
     eventToUpdate.description = eventData.description ?? eventToUpdate.description
     eventToUpdate.coverImg = eventData.coverImg ?? eventToUpdate.coverImg
     eventToUpdate.location = eventData.location ?? eventToUpdate.location
     eventToUpdate.capacity = eventData.capacity ?? eventToUpdate.capacity
     eventToUpdate.startDate = eventData.startDate ?? eventToUpdate.startDate
+
+
 
     await eventToUpdate.save()
 
