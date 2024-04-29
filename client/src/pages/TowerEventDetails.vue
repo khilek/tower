@@ -145,11 +145,10 @@ onMounted(() => {
 
   <div class="container">
     <CommentForm />
-    <section class="row ">
-      <div class="col-6 col-md-6 card d-flex justify-content-center p-2">
-        <div v-for="comment in comments" :key="comment.id">
-          <CommentCard :comment="comment" />
-        </div>
+    <section>
+      <div v-for="comment in comments.reverse()" :key="comment.id"
+        class="col-6 col-md-6 card d-flex justify-content-center p-3 mb-2">
+        <CommentCard :comment="comment" />
       </div>
     </section>
   </div>

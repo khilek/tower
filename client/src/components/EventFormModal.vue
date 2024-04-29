@@ -79,8 +79,8 @@ async function createEvents() {
               <label for="eventName">Event Name</label>
             </div>
             <div class="form-floating mb-3">
-              <textarea v-model="eventData.description" class="form-control" placeholder="Leave a description here"
-                id="eventDescription" maxlength="500"></textarea>
+              <textarea type="text" v-model="eventData.description" class="form-control"
+                placeholder="Leave a description here" id="eventDescription" maxlength="500"></textarea>
               <label for="eventDescription">Event Description</label>
             </div>
             <div class="form-floating mb-3">

@@ -36,16 +36,18 @@ async function eraseComment(commentId) {
 
 
 <template>
-
-  <div class="card p-3 mb-3">
+  <span>
     <img class="creator-img" :src="comment.creator.picture" alt="">
-    <p>{{ comment.creator.name }}</p>
-    <p>{{ comment.body }}</p>
-    <div class="text-end">
-      <button v-if="comment.creatorId == AppState.account?.id" @click="eraseComment(comment.id)"
-        class="btn btn-outline-danger" title="Full Send!">Delete</button>
-    </div>
+    <span class="m-3">
+      {{ comment.creator.name }}
+    </span>
+  </span>
+  <p>{{ comment.body }}</p>
+  <div class="text-end">
+    <button v-if="comment.creatorId == AppState.account?.id" @click="eraseComment(comment.id)"
+      class="btn btn-outline-danger" title="Full Send!">Delete</button>
   </div>
+
 </template>
 
 
