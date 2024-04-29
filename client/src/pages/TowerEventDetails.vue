@@ -92,7 +92,7 @@ onMounted(() => {
       <div class="col-6 col-md-6 d-flex justify-content-center">
         <img class="event-img" :src="event.coverImg" alt="">
       </div>
-      <div class="col-6 col-md-6 text-center border border-primary">
+      <div class="col-6 col-md-6 text-center ">
         <h2>EVENT DETAILS:</h2>
         <p> {{ event.description }} </p>
         <span class="fs-2">Where: {{ event.location }}</span>
