@@ -100,7 +100,7 @@ onMounted(() => {
         <p class="fs-4"> Event Capacity: {{ event.capacity }}</p>
         <div class="col col-md- text-center  ">
           Is this event canceled?
-          <p v-if="event.isCanceled === true" class="fs-3 fw-bold text-danger"> Canceled</p>
+          <p v-if="event.isCanceled == true" class="fs-3 fw-bold text-danger"> Canceled</p>
           <p v-else class="fs-3 fw-bold"> No </p>
         </div>
       </div>
@@ -135,10 +135,10 @@ onMounted(() => {
       </div>
       <div class="col-6 col-md-6 card text-center p-3 fs-4">
         <span> Interested in attending? </span>
-        <button v-if="!youAreATicketHolder" :disabled="event.capacity === event.ticketCount" @click="attendEvent()"
-          class="btn btn-success mt-3 ">Get a
+        <button
+          :disabled="event.capacity === event.ticketCount || youAreATicketHolder != undefined || event.isCanceled === true"
+          @click="attendEvent()" class="btn btn-success mt-3 ">Get a
           Ticket!</button>
-        <button v-else disabled @click="attendEvent()" class="btn btn-success mt-3 ">Get a Ticket!</button>
       </div>
     </section>
   </div>

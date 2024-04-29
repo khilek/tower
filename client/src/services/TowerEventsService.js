@@ -31,6 +31,7 @@ class TowerEventsService {
     logger.log('Creating Event', response.data)
     const newEvent = new TowerEvent(response.data)
     AppState.events.push(newEvent)
+    return newEvent
   }
 
   async closeEvent(eventId) {
