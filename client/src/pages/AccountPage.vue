@@ -50,14 +50,14 @@ onMounted(() => {
     </div>
 
     <section class="row gap-3 ">
-      <div class="col-2 g-3 p-2 card d-flex justify-content-center" v-for="ticketHolder in ticketHolders"
-        :key="ticketHolder.id">
-        <img class="img-fluid" :src="ticketHolder.event.coverImg" alt="">
+      <div class="col-6 col-md-4 col-lg-2 card g-3 p-2 d-flex justify-content-center "
+        v-for="ticketHolder in ticketHolders" :key="ticketHolder.id">
+        <img class="img-account" :src="ticketHolder.event.coverImg" alt="">
         <RouterLink :to="{ name: 'TowerEvents', params: { eventId: ticketHolder.event.id } }">
           {{ ticketHolder.event.name }}
         </RouterLink>
         {{ ticketHolder.event.startDate.toLocaleString() }}
-        <div class="d-flex justify-content-end m-2 p-2 ">
+        <div class="d-flex justify-content-end m-2 p-2">
           <button @click="ripTicket(ticketHolder.id)" class="btn btn-outline-danger w-25 "><i
               class="mdi mdi-delete-outline"></i></button>
         </div>
@@ -67,6 +67,10 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-// img {
-//   max-width: 100px;
-// }</style>
+img-account {
+  height: 100%;
+  width: 100%;
+  max-width: 100px;
+  object-fit: contain;
+}
+</style>
