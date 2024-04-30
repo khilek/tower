@@ -79,7 +79,7 @@ onMounted(() => {
 
 
     <section class="row">
-      <div class="col-6 col-md-4 col-lg-2 text-center" v-for="e in eventType" :key="e.id">
+      <div class="col-8 col-md-5 col-lg-2 text-center" v-for="e in eventType" :key="e.id">
         <EventCard :event="e" />
       </div>
     </section>
